@@ -16,6 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * 如果有用户权限问题：-DHADOOP_USER_NAME=hzlimao
+ *
  * @author lm
  * @create 2017-12-11 下午3:29
  * 内容：
@@ -27,7 +29,7 @@ public class HbaseTest_1 {
 
     static Configuration conf = null;
     private static final String ZKconnect = "hadoop05:2181,hadoop07:2181,hadoop07:2181";
-//    private static final String ZKconnect="hbase17.lt.163.org,hbase18.lt.163.org,hbase19.lt.163.org";//测试环境
+//    private static final String ZKconnect="hbase17.lt.163.org:2181,hbase18.lt.163.org:2181,hbase19.lt.163.org:2181";//测试环境
 
     private static HBaseAdmin admin = null;
     private static HTableDescriptor desc = null;
@@ -35,6 +37,7 @@ public class HbaseTest_1 {
     private static Connection conn = null;
 
     private static String tableName = "test1_table";
+//    private static String tableName = "beauty:Beauty_Channel";//测试环境
 
     @Before
     public void init() throws Exception {
@@ -249,7 +252,7 @@ public class HbaseTest_1 {
                     .toBytes("name1"));
             filters.add(filter1);
 
-            Filter filter2 =  new SingleColumnValueFilter(Bytes
+            Filter filter2 = new SingleColumnValueFilter(Bytes
                     .toBytes("cf3"), Bytes
                     .toBytes("row3"), CompareFilter.CompareOp.EQUAL, Bytes
                     .toBytes("1"));
@@ -280,7 +283,6 @@ public class HbaseTest_1 {
     }
 
 
-
     /**
      * 查询某列数据的某个版本
      *
@@ -305,7 +307,6 @@ public class HbaseTest_1 {
         }
 
     }
-
 
 
     /**
@@ -349,5 +350,15 @@ public class HbaseTest_1 {
         admin.deleteTable(tableName);
     }
 
-}
+    public static void main(String[] args) {
+        while (true) {
+            try {
+                Thread.sleep(1000L);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println(2221);
+        }
+    }
 
+}
